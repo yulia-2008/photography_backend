@@ -11,8 +11,7 @@ class PhotoSerializer < ActiveModel::Serializer
     # end
 
     def attached_image 
-        #  object.image.blob.key if object.image.attached? 
-       true if  object.image.attached?  
+        object.image.blob.key if object.image.attached?        
     end 
 end
   
