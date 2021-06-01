@@ -1,5 +1,5 @@
 class PhotoSerializer < ActiveModel::Serializer
-    attributes :id, :user_id, :category, :votes, :description, :image
+    attributes :id, :user_id, :category, :votes, :description, :attached_image
 
     # def image   
     #     if object.image.attached? 
@@ -10,8 +10,9 @@ class PhotoSerializer < ActiveModel::Serializer
     #     end
     # end
 
-    def image 
-         object.image.blob.key if object.image.attached? 
+    def attached_image 
+        #  object.image.blob.key if object.image.attached? 
+       true if  object.image.attached?  
     end 
 end
   
