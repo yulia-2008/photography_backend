@@ -12,10 +12,11 @@ class PhotosController < ApplicationController
     end
 
     def create
-      img_params = params[:image]
-      params = photo_params.except(:image)
+      img_params = params[:img]
+      params = photo_params.except(:img)
       @photo = Photo.create!(params)
       @photo.image.attach(img_params)
+      
         if @photo.image.attached?
           render json: { photo: "attached"}
         else 
@@ -26,11 +27,11 @@ class PhotosController < ApplicationController
     private
         
     def photo_params
-        params.require(:photo).permit(:category, :votes, :description, :user_id, :image)
+        params.require(:photo).permit(:category, :votes, :description, :user_id, :img)
     end
 
-    def image_params
-        params.permit(:image)
-    end
+    # def image_params
+    #     params.permit(:image)
+    # end
     
 end
