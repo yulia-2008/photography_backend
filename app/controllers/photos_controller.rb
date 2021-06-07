@@ -12,25 +12,21 @@ class PhotosController < ApplicationController
     end
 
     def create
-        @photo = Photo.create!(photo_params)
-        render json: { photo: PhotoSerializer.new(@photo)}
-    end
-
-    def upload_image
-        @photo = Photo.find_by(id:params[:id])
-         #render json: {"test": @photo}
-        @photo.image.attach(image_params[:image])
+      img_params = params[:image]
+      params = photo_params.except(:image)
+      @photo = Photo.create!(params)
+      @photo.image.attach(img_params)
         if @photo.image.attached?
-          render json: { photo_instance_with_attached_img: PhotoSerializer.new(@photo)}
+          render json: { photo: "attached"}
         else 
           render json: {errors: "No image attached"}
-        end
-      end
+        end     
+    end
 
     private
         
     def photo_params
-        params.require(:photo).permit(:category, :votes, :description, :user_id)
+        params.require(:photo).permit(:category, :votes, :description, :user_id, :image)
     end
 
     def image_params
