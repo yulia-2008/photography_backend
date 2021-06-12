@@ -3,4 +3,5 @@ Rails.application.routes.draw do
   resources :photos
 
   post '/login', to: 'auth#create'
+  post '/photos/:id/upload_image', to: 'photos#upload_image'
 end
