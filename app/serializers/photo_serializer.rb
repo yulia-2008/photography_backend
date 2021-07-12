@@ -1,5 +1,5 @@
 class PhotoSerializer < ActiveModel::Serializer
-    attributes :id, :user_id, :category, :votes, :description, :attached_image
+    attributes :id, :user_id, :category, :votes, :description, :attached_image, :created_at
 
     def attached_image 
         # for url on AWS
